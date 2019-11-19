@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class BackgroundManager : MonoBehaviour
 {
     public GameObject[] Panels;
-    public Button ButtonLeft;
-    public Button ButtonRight;
 
     private int currentPanel;
     private int numPanels;
