@@ -4,63 +4,72 @@ using UnityEngine;
 
 public class ZoneBehavior : MonoBehaviour
 {
+    // zone information
     public string OwnerName = "Neko";
+    public string AnimName = "Squish";
+    public bool IsHorizontal = false;
+    public float Range = -200f;
+    public int NumFrames = 19;
 
     private CursorManager csm;
     private SpriteAnimator sa;
-    private AudioSource audio;
 
+    // state information
     private bool isInRange = false;
-    private bool isSquishing = false;
+    private bool isPressing = false;
     private bool isRestoring = true;
-    private bool hasClicked = false;
-    private float maxY;
-
+    private float maxVal;
     private int currentFrame = 0;
-    private int numFrames;
+
+    // TODO: get this working
     private int startFrame;
+
+    // TODO: deactivate other zones
 
     void Awake()
     {
         csm = GameObject.Find("CanvasManager").GetComponent<CursorManager>();
         sa = GameObject.Find(OwnerName).GetComponent<SpriteAnimator>();
-        audio = GameObject.Find("Audio Source").GetComponent<AudioSource>();
-        numFrames = sa.GetNumFrames();
     }
 
     void FixedUpdate()
     {
-        if (Input.GetMouseButton(0))
+        // mouse pressed
+        if ((isInRange || isPressing) && Input.GetMouseButton(0))
         {
-            if (isInRange || isSquishing)
-            {
-                float mouseY = Input.mousePosition.y;
-                if (!isSquishing)
-                {
-                    isSquishing = true;
-                    csm.SetSquish();
-                    audio.Play();
+            // get input value
+            float mouseVal;
+            if (IsHorizontal) mouseVal = Input.mousePosition.x;
+            else mouseVal = Input.mousePosition.y;
 
-                    // make sure the start position marks the start of the frame
-                    maxY = mouseY;
-                    startFrame = currentFrame;
-                }
-                UpdateFrame(mouseY);
+            // if this is the start of the press
+            if (!isPressing)
+            {
+                isPressing = true;
+                csm.SetSquish();
+                sa.PlayAudio();
+
+                // make sure the start position marks the start frame
+                maxVal = mouseVal;
+                startFrame = currentFrame;
             }
+            UpdateFrame(mouseVal);
+
+            // TODO: dragging too far restores animation
         }
 
-        if (Input.GetMouseButtonUp(0))
+        // mouse released
+        if (isPressing && Input.GetMouseButtonUp(0))
         {
-            if (isSquishing)
-            {
-                isSquishing = false;
-                isRestoring = true;
+            isPressing = false;
+            isRestoring = true;
 
-                if (isInRange) csm.SetPreparedSquish();
-                else csm.SetIdle();
-            }
+            // update cursor
+            if (isInRange) csm.SetPreparedSquish();
+            else csm.SetIdle();
         }
 
+        // restore animation to initial frame
         if (isRestoring)
         {
             RestoreFrame();
@@ -71,35 +80,35 @@ public class ZoneBehavior : MonoBehaviour
     {
         isInRange = true;
 
-        if (!isSquishing)
-        {
-            csm.SetPreparedSquish();
-        }
+        // update cursor
+        if (!isPressing) csm.SetPreparedSquish();
     }
 
     void OnMouseExit()
     {
         isInRange = false;
 
-        if (!isSquishing)
-        {
-            csm.SetIdle();
-        }
-    }
+        // update cursor
+        if (!isPressing) csm.SetIdle();
+    }    
 
+    // Helper functions =======================================================
+
+    // update frame of animation based on input
     private void UpdateFrame(float value)
     {
         // TODO: move collider up and down?
-        currentFrame = (int) Map(maxY, maxY - 200f, 0f, (float) numFrames - 1f, value);
-        sa.SetSprite(currentFrame);
+        currentFrame = (int) Map(maxVal, maxVal + Range, 0f, (float) NumFrames - 1f, value);
+        sa.SetSprite(AnimName, currentFrame);
     }
 
+    // restore animation to starting state
     private void RestoreFrame()
     {
         if (currentFrame > 0)
         {
             currentFrame--;
-            sa.SetSprite(currentFrame);
+            sa.SetSprite(AnimName, currentFrame);
         }
         else
         {
@@ -107,9 +116,8 @@ public class ZoneBehavior : MonoBehaviour
         }
     }
 
-    // Helper functions =======================================================
-
-    public float Map(float oldMin, float oldMax, float newMin, float newMax, float oldValue)
+    // mapping function
+    private float Map(float oldMin, float oldMax, float newMin, float newMax, float oldValue)
     {
         if (oldMin < oldMax)
         {

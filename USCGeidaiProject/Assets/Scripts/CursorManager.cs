@@ -18,7 +18,7 @@ public class CursorManager : MonoBehaviour
     {
         hotSpotCenter = new Vector2(Idle.width / 2f, Idle.height / 2f);
         hotSpotCenterSmall = new Vector2(Default.width / 2f, Default.height / 2f);
-        Cursor.SetCursor(Default, hotSpotCenter, cursorMode);
+        Cursor.SetCursor(Default, hotSpotCenterSmall, cursorMode);
     }
 
     public void SetDefault()

@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class SpriteAnimator : MonoBehaviour
 {
+    // animation frames
     public Sprite[] SquishDown;
+    public Sprite[] StretchRight;
 
     private SpriteRenderer sr;
+    private AudioSource audio;
     private int numSquishFrames;
 
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        audio = GetComponent<AudioSource>();
+
+        // initialize states
         numSquishFrames = SquishDown.Length;
-        SetSprite(0);
+        sr.sprite = SquishDown[0];
     }
 
     public int GetNumFrames()
@@ -21,8 +27,25 @@ public class SpriteAnimator : MonoBehaviour
         return numSquishFrames;
     }
 
-    public void SetSprite(int index)
+    public void SetSprite(string animName, int index)
     {
-        sr.sprite = SquishDown[index];
+        switch(animName)
+        {
+            case "Squish":
+                sr.sprite = SquishDown[index];
+                break;
+
+            case "Stretch":
+                sr.sprite = StretchRight[index];
+                break;
+            
+            default:
+                break;
+        }
+    }
+
+    public void PlayAudio()
+    {
+        audio.Play();
     }
 }
