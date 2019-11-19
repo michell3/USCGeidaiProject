@@ -12,6 +12,8 @@ public class SpriteAnimator : MonoBehaviour
     private AudioSource audio;
     private int numSquishFrames;
 
+    // TODO: Populate frames from resources folder
+
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
