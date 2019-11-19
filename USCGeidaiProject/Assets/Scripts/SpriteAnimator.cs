@@ -8,8 +8,13 @@ public class SpriteAnimator : MonoBehaviour
     public Sprite[] SquishDown;
     public Sprite[] StretchRight;
 
+    // audio
+    public AudioClip SquishClip;
+    public AudioClip StretchClip;
+    public AudioClip RestoreClip;
+
     private SpriteRenderer sr;
-    private AudioSource audio;
+    private AudioSource audioSource;
     private int numSquishFrames;
 
     // TODO: Populate frames from resources folder
@@ -17,7 +22,7 @@ public class SpriteAnimator : MonoBehaviour
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         // initialize states
         numSquishFrames = SquishDown.Length;
@@ -46,8 +51,33 @@ public class SpriteAnimator : MonoBehaviour
         }
     }
 
-    public void PlayAudio()
+    public void PlayAudio(string animName)
     {
-        audio.Play();
+        switch(animName)
+        {
+            case "Squish":
+                audioSource.clip = SquishClip;
+                audioSource.loop = true;
+                break;
+
+            case "Stretch":
+                audioSource.clip = StretchClip;
+                audioSource.loop = true;
+                break;
+
+            case "Restore":
+                audioSource.clip = RestoreClip;
+                audioSource.loop = false;
+                break;
+            
+            default:
+                break;
+        }
+        audioSource.Play();
+    }
+
+    public void StopAudio()
+    {
+        audioSource.Stop();
     }
 }

@@ -13,23 +13,25 @@ public class ZoneBehavior : MonoBehaviour
 
     private CursorManager csm;
     private SpriteAnimator sa;
+    private ZoneManager zm;
 
     // state information
     private bool isInRange = false;
     private bool isPressing = false;
-    private bool isRestoring = true;
+    private bool isRestoring = false;
     private float maxVal;
     private int currentFrame = 0;
 
     // TODO: get this working
     private int startFrame;
 
-    // TODO: deactivate other zones
+    // TODO: detect drag velocity to stop playing sounds
 
     void Awake()
     {
         csm = GameObject.Find("CanvasManager").GetComponent<CursorManager>();
         sa = GameObject.Find(OwnerName).GetComponent<SpriteAnimator>();
+        zm = GameObject.Find("ZoneManager_" + OwnerName).GetComponent<ZoneManager>();
     }
 
     void FixedUpdate()
@@ -46,8 +48,15 @@ public class ZoneBehavior : MonoBehaviour
             if (!isPressing)
             {
                 isPressing = true;
+
+                // deactivate other zones
+                zm.SetZone(AnimName);
+
+                // update cursor
                 csm.SetSquish();
-                sa.PlayAudio();
+
+                // play sound
+                sa.PlayAudio(AnimName);
 
                 // make sure the start position marks the start frame
                 maxVal = mouseVal;
@@ -64,9 +73,16 @@ public class ZoneBehavior : MonoBehaviour
             isPressing = false;
             isRestoring = true;
 
+            // reactivate other zones
+            zm.ResetZones();
+
             // update cursor
             if (isInRange) csm.SetPreparedSquish();
             else csm.SetIdle();
+
+            // change sound
+            sa.StopAudio();
+            sa.PlayAudio("Restore");
         }
 
         // restore animation to initial frame

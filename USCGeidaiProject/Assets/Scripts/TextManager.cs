@@ -7,6 +7,8 @@ public class TextManager : MonoBehaviour
 {
     public string[] EnglishLines;
     public string[] JapaneseLines;
+
+    // TODO: find this in child object
     public Text EnglishText;
     public Text JapaneseText;
 

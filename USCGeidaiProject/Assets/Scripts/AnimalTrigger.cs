@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimalTrigger : MonoBehaviour
 {
-    public string name = "Neko-chan";
+    public string AnimalName = "Neko";
 
     private CanvasManager cm;
 
@@ -15,7 +15,7 @@ public class AnimalTrigger : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log("Clicked " + name);
-        cm.SetInteractive();
+        Debug.Log("Clicked " + AnimalName);
+        cm.SetInteractive(AnimalName);
     }
 }
