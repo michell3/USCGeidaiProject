@@ -7,10 +7,12 @@ public class SpriteAnimator : MonoBehaviour
     // animation frames
     public Sprite[] SquishDown;
     public Sprite[] StretchRight;
+    public Sprite[] Grab;
 
     // audio
     public AudioClip SquishClip;
     public AudioClip StretchClip;
+    public AudioClip GrabClip;
     public AudioClip RestoreClip;
 
     private SpriteRenderer sr;
@@ -45,6 +47,10 @@ public class SpriteAnimator : MonoBehaviour
             case "Stretch":
                 sr.sprite = StretchRight[index];
                 break;
+
+            case "Grab":
+                sr.sprite = Grab[index];
+                break;
             
             default:
                 break;
@@ -62,6 +68,11 @@ public class SpriteAnimator : MonoBehaviour
 
             case "Stretch":
                 audioSource.clip = StretchClip;
+                audioSource.loop = true;
+                break;
+
+            case "Grab":
+                audioSource.clip = GrabClip;
                 audioSource.loop = true;
                 break;
 

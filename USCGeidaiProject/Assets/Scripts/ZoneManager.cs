@@ -21,6 +21,10 @@ public class ZoneManager : MonoBehaviour
                 index = 1;
                 break;
 
+            case "Grab":
+                index = 2;
+                break;
+
             default:
                 index = 0;
                 break;

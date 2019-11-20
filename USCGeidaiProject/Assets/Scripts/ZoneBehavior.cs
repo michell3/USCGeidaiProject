@@ -7,9 +7,11 @@ public class ZoneBehavior : MonoBehaviour
     // zone information
     public string OwnerName = "Neko";
     public string AnimName = "Squish";
+    public bool IsClick = false;
     public bool IsHorizontal = false;
     public float Range = -200f;
     public int NumFrames = 19;
+    public float ClickSpeed = 3f;
 
     private CursorManager csm;
     private SpriteAnimator sa;
@@ -21,6 +23,8 @@ public class ZoneBehavior : MonoBehaviour
     private bool isRestoring = false;
     private float maxVal;
     private int currentFrame = 0;
+
+    private float clickTime = 0f;
 
     // TODO: get this working
     private int startFrame;
@@ -40,9 +44,14 @@ public class ZoneBehavior : MonoBehaviour
         if ((isInRange || isPressing) && Input.GetMouseButton(0))
         {
             // get input value
-            float mouseVal;
-            if (IsHorizontal) mouseVal = Input.mousePosition.x;
-            else mouseVal = Input.mousePosition.y;
+            float inputVal;
+
+            if (IsClick) {
+                clickTime += ClickSpeed;
+                inputVal = clickTime;
+            }
+            else if (IsHorizontal) inputVal = Input.mousePosition.x;
+            else inputVal = Input.mousePosition.y;
 
             // if this is the start of the press
             if (!isPressing)
@@ -59,10 +68,10 @@ public class ZoneBehavior : MonoBehaviour
                 sa.PlayAudio(AnimName);
 
                 // make sure the start position marks the start frame
-                maxVal = mouseVal;
+                maxVal = inputVal;
                 startFrame = currentFrame;
             }
-            UpdateFrame(mouseVal);
+            UpdateFrame(inputVal);
 
             // TODO: dragging too far restores animation
         }
@@ -83,6 +92,8 @@ public class ZoneBehavior : MonoBehaviour
             // change sound
             sa.StopAudio();
             sa.PlayAudio("Restore");
+
+            if (IsClick) clickTime = 0f;
         }
 
         // restore animation to initial frame

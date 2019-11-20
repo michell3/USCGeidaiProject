@@ -42,7 +42,7 @@ public class CanvasManager : MonoBehaviour
         }
         currentManager.SetActive(true);
         CanvasInteractive.SetActive(true);
-        csm.SetIdle();
+        // csm.SetIdle();
     }
 
     public void SetNeighborhood()

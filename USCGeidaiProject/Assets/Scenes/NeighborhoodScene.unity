@@ -1091,21 +1091,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SquishDown:
-  - {fileID: 21300000, guid: c1a6073bf876540e5a2984cbddcc424d, type: 3}
-  - {fileID: 21300000, guid: 3493cc30becb640989a75260a5ae3dce, type: 3}
-  - {fileID: 21300000, guid: 466202dd945894c9cb63654b68f5126d, type: 3}
-  - {fileID: 21300000, guid: b6af86772f8284e62950b09a9ac77c69, type: 3}
-  - {fileID: 21300000, guid: aa253617a575b4e288425829dc58b11b, type: 3}
+  - {fileID: 21300000, guid: 69e150eda14ad40aea33341c27e669c6, type: 3}
+  - {fileID: 21300000, guid: 59c4ceb86556b407d8a2ce27089e81e8, type: 3}
+  - {fileID: 21300000, guid: a3b8601f017c8409a8f497a24b97ee0f, type: 3}
+  - {fileID: 21300000, guid: 75ee09a24c6354147aee501153b32bfa, type: 3}
+  - {fileID: 21300000, guid: da84e339cdaf04ee1b8b196cc0350db0, type: 3}
   StretchRight:
-  - {fileID: 21300000, guid: c1a6073bf876540e5a2984cbddcc424d, type: 3}
-  - {fileID: 21300000, guid: 836ce6311164242ce840910fb88514f8, type: 3}
-  - {fileID: 21300000, guid: 411f07344a6024bffa7923a87ab561e9, type: 3}
-  - {fileID: 21300000, guid: 4b297fdcbd90d4a26a4cd771f2e90ddb, type: 3}
-  - {fileID: 21300000, guid: 7f3e5fda848d0407dbc3b932a95eaf85, type: 3}
-  - {fileID: 21300000, guid: 695ecdedf5d0b4e229a50ef35146dc14, type: 3}
-  - {fileID: 21300000, guid: 92d3c0eb2349a42fb8ed887ef0022143, type: 3}
+  - {fileID: 21300000, guid: 69e150eda14ad40aea33341c27e669c6, type: 3}
+  - {fileID: 21300000, guid: 7058747ff2cc541ff9fc65d0f115aef8, type: 3}
+  - {fileID: 21300000, guid: 66a0b67051dd34ff39b0b52fd9a8d56a, type: 3}
+  - {fileID: 21300000, guid: 8f93480bb75964184aae2c80d2855555, type: 3}
+  - {fileID: 21300000, guid: 093052c61836a43459e092d59cd8e2d6, type: 3}
+  - {fileID: 21300000, guid: 65c7b9d865dfd488d968324498a65750, type: 3}
+  - {fileID: 21300000, guid: 4d177a54159f144e59ec106cb56d4c46, type: 3}
+  Grab: []
   SquishClip: {fileID: 8300000, guid: 16318dad2f75b4f47b4a86c9556e56cd, type: 3}
   StretchClip: {fileID: 8300000, guid: 761b6abd4145e454aa30f50a01e5dc53, type: 3}
+  GrabClip: {fileID: 0}
   RestoreClip: {fileID: 8300000, guid: bbf3c48fde9ea47d3836d3d09849105e, type: 3}
 --- !u!212 &282611619
 SpriteRenderer:
@@ -1145,7 +1147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c1a6073bf876540e5a2984cbddcc424d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 69e150eda14ad40aea33341c27e669c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1203,9 +1205,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OwnerName: Hebi
   AnimName: Squish
+  IsClick: 0
   IsHorizontal: 0
   Range: -200
   NumFrames: 5
+  ClickSpeed: 3
 --- !u!61 &345789329
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1265,6 +1269,8 @@ GameObject:
   - component: {fileID: 375738901}
   - component: {fileID: 375738900}
   - component: {fileID: 375738899}
+  - component: {fileID: 375738904}
+  - component: {fileID: 375738903}
   m_Layer: 5
   m_Name: Panel_Text
   m_TagString: Untagged
@@ -1307,9 +1313,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnglishLines:
-  - Hebi-san
+  - You found me! My name is Hebi-san.
+  - "My daily routine is to surprise Ningen-san, but I really want to be touched\u2026"
+  - "So please, do not be scared, and just touch anywhere you want\u2026"
+  - P.S. My favorite thing is to be squished. YOLO.
   JapaneseLines:
-  - ???
+  - "\u898B\u3064\u304B\u3063\u3061\u3083\u3063\u305F\u2026 \u304A\u308C\u306F\u30D8\u30D3\u3055\u3093\u3002"
+  - "\u666E\u6BB5\u306F\u4EBA\u9593\u3055\u3093\u3092\u9A5A\u304B\u3059\u306E\u304C\u4ED5\u4E8B\u306A\u3093\u3060\u3051\u3069\u3001
+    \u5B9F\u306F\u304B\u307E\u3061\u3087\u306A\u3093\u3060\u3088\u306D\u2026\u3002 "
+  - "\u3060\u304B\u3089\u3001\u9A5A\u304B\u306A\u3044\u3067\u3001 \u3069\u3093\u3069\u3093\u89E6\u3063\u3066\u304F\u308C\u2026
+    \u983C\u3080\u304B\u3089\u2026 "
+  - "\u3061\u306A\u307F\u306B\u304A\u6C17\u306B\u5165\u308A\u306F\u4E00\u56DE\u8EE2\u3072\u306D\u308A\u3060\u2026
+    \u3088\u308D\u3057\u304F\u306A\u2026"
   EnglishText: {fileID: 1671378796}
   JapaneseText: {fileID: 1699955663}
   ActivationObjects:
@@ -1350,6 +1365,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375738897}
   m_CullTransparentMesh: 0
+--- !u!61 &375738903
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375738897}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1800, y: 265.66}
+  m_EdgeRadius: 0
+--- !u!50 &375738904
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375738897}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &416390807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,7 +1478,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 5.17}
+  m_Offset: {x: -25.696167, y: 6.704239}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1427,7 +1489,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 243.67, y: 177.35}
+  m_Size: {x: 295.06232, y: 439.80594}
   m_EdgeRadius: 0
 --- !u!50 &416390811
 Rigidbody2D:
@@ -1468,7 +1530,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c1a6073bf876540e5a2984cbddcc424d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7058747ff2cc541ff9fc65d0f115aef8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1712,7 +1774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &512688564
 Transform:
   m_ObjectHideFlags: 0
@@ -2295,6 +2357,9 @@ GameObject:
   - component: {fileID: 774175098}
   - component: {fileID: 774175097}
   - component: {fileID: 774175096}
+  - component: {fileID: 774175100}
+  - component: {fileID: 774175099}
+  - component: {fileID: 774175101}
   m_Layer: 5
   m_Name: Button_Back
   m_TagString: Untagged
@@ -2412,6 +2477,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774175094}
   m_CullTransparentMesh: 0
+--- !u!61 &774175099
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774175094}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 235.43, y: 144.2}
+  m_EdgeRadius: 0
+--- !u!114 &774175100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774175094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e18a4f2b3dcb46ca8144b58373c957d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &774175101
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774175094}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &845396562
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,6 +3188,105 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158036245}
   m_CullTransparentMesh: 0
+--- !u!1 &1215613696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1215613700}
+  - component: {fileID: 1215613699}
+  - component: {fileID: 1215613698}
+  - component: {fileID: 1215613697}
+  m_Layer: 0
+  m_Name: GrabZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1215613697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215613696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd772c0376e7476181663283208e704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OwnerName: Neko
+  AnimName: Grab
+  IsClick: 1
+  IsHorizontal: 0
+  Range: 200
+  NumFrames: 13
+  ClickSpeed: 3
+--- !u!61 &1215613698
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215613696}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.6569519, y: 15.491669}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 304.4478, y: 109.15582}
+  m_EdgeRadius: 0
+--- !u!50 &1215613699
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215613696}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!4 &1215613700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215613696}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1736951596}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1242172107
 GameObject:
   m_ObjectHideFlags: 0
@@ -3513,8 +3736,23 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f7a5a627345014bc1823ce04632853f6, type: 3}
   - {fileID: 21300000, guid: 530cfe6cdddc7409aa65091d6bf39316, type: 3}
   - {fileID: 21300000, guid: 51601113d53f04a93a4732b9c472c5ce, type: 3}
+  Grab:
+  - {fileID: 21300000, guid: 73e21dadeaa2b4899bdef641305a3947, type: 3}
+  - {fileID: 21300000, guid: 546b3cfb89df5495dbb68deb0d2e698e, type: 3}
+  - {fileID: 21300000, guid: 4d85cb204c58f460493b770face5ce31, type: 3}
+  - {fileID: 21300000, guid: f3ab85a3ef47e45cba8b9f7340633e2e, type: 3}
+  - {fileID: 21300000, guid: f6fd16097802d4873a691c92e1dff311, type: 3}
+  - {fileID: 21300000, guid: f47f08450cf5f4e08a0e9fd6c0651642, type: 3}
+  - {fileID: 21300000, guid: d02399eedffcf484d8b7dbe7c6bf5b3f, type: 3}
+  - {fileID: 21300000, guid: d648c7c9606784edaa6641a670b22f07, type: 3}
+  - {fileID: 21300000, guid: 5c0b858c9e9684a7fb1b7f0b1970b4ae, type: 3}
+  - {fileID: 21300000, guid: fd6ce19ebe18b4606a14022448b74ef4, type: 3}
+  - {fileID: 21300000, guid: 585f2004edf1d440ea6a77c7a0f25782, type: 3}
+  - {fileID: 21300000, guid: e961e29c127ed4c1da9205736be0d5fa, type: 3}
+  - {fileID: 21300000, guid: a5fa5473cfb06476686aeadd6725c8b9, type: 3}
   SquishClip: {fileID: 8300000, guid: 16318dad2f75b4f47b4a86c9556e56cd, type: 3}
   StretchClip: {fileID: 8300000, guid: 761b6abd4145e454aa30f50a01e5dc53, type: 3}
+  GrabClip: {fileID: 8300000, guid: 16318dad2f75b4f47b4a86c9556e56cd, type: 3}
   RestoreClip: {fileID: 8300000, guid: bbf3c48fde9ea47d3836d3d09849105e, type: 3}
 --- !u!212 &1282330153
 SpriteRenderer:
@@ -3832,9 +4070,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OwnerName: Neko
   AnimName: Squish
+  IsClick: 0
   IsHorizontal: 0
   Range: -200
   NumFrames: 19
+  ClickSpeed: 3
 --- !u!1 &1436003921
 GameObject:
   m_ObjectHideFlags: 0
@@ -4001,6 +4241,8 @@ GameObject:
   - component: {fileID: 1562049581}
   - component: {fileID: 1562049580}
   - component: {fileID: 1562049582}
+  - component: {fileID: 1562049584}
+  - component: {fileID: 1562049583}
   m_Layer: 5
   m_Name: Panel_Text
   m_TagString: Untagged
@@ -4090,6 +4332,53 @@ MonoBehaviour:
   JapaneseText: {fileID: 1708881421}
   ActivationObjects:
   - {fileID: 1736951595}
+--- !u!61 &1562049583
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562049578}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1800, y: 265.66}
+  m_EdgeRadius: 0
+--- !u!50 &1562049584
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562049578}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1637749366
 GameObject:
   m_ObjectHideFlags: 0
@@ -4106,7 +4395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1637749367
 Transform:
   m_ObjectHideFlags: 0
@@ -4134,7 +4423,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c6e484c886f214ef793806499d08b6ea, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 09fefbcd82c66485f965897f690e65a3, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4481,6 +4770,7 @@ Transform:
   m_Children:
   - {fileID: 1416648894}
   - {fileID: 1876997526}
+  - {fileID: 1215613700}
   m_Father: {fileID: 512688564}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4499,6 +4789,7 @@ MonoBehaviour:
   Zones:
   - {fileID: 1416648893}
   - {fileID: 1876997525}
+  - {fileID: 1215613696}
 --- !u!1 &1799667623
 GameObject:
   m_ObjectHideFlags: 0
@@ -4623,9 +4914,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OwnerName: Neko
   AnimName: Stretch
+  IsClick: 0
   IsHorizontal: 1
   Range: 200
   NumFrames: 10
+  ClickSpeed: 3
 --- !u!61 &1876997528
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4917,9 +5210,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OwnerName: Hebi
   AnimName: Stretch
+  IsClick: 0
   IsHorizontal: 1
   Range: 200
   NumFrames: 7
+  ClickSpeed: 3
 --- !u!61 &2090349205
 BoxCollider2D:
   m_ObjectHideFlags: 0
